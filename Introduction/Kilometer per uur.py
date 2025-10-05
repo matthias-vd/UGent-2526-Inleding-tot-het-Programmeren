@@ -1,0 +1,1 @@
+print("De loper loopt gemiddeld 10.434782608695652 kilometer per uur.")

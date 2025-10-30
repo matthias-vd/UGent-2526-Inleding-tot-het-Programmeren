@@ -1,4 +1,19 @@
-bedrag = float(input("Bedrag"))
+import copy
+bed=float(input())
+bed0=copy.deepcopy(bed)
+i=float(input())
+j=int(input())
+l=1
+while l!=j+1:
+    bed*=(1+i)
+    print(f'Bedrag na {l} jaar: €{format(bed,".2f")}.')
+    l+=1
+if bed0<bed:
+    print(f'Na {j} jaar bedraagt de winst €{format(abs(bed-bed0),".2f")}.')
+if bed0>bed:
+    print(f'Na {j} jaar bedraagt het verlies €{format(abs(bed-bed0),".2f")}.')
+
+'''bedrag = float(input("Bedrag"))
 rentevoet = float(input("Rentevoet"))
 duurtijd = int(input("Duurtijd"))
 
@@ -25,4 +40,4 @@ if bedrag_delta < 0:
     bedrag_delta = abs(bedrag_delta)
     print(f"Na {duurtijd} jaar bedraagt het verlies €{bedrag_delta}.")
 elif bedrag_delta > 0:
-    print(f"Na {duurtijd} jaar bedraagt de winst €{bedrag_delta}.")
+    print(f"Na {duurtijd} jaar bedraagt de winst €{bedrag_delta}.")'''

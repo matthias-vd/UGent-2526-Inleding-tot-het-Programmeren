@@ -87,53 +87,53 @@ class SoccerPlayer:
 
 
 class SoccerTeam:
-    SIZE = 11
-
     def __init__(self, name: str):
-        self._name = name
-        self._players = []
+        self.name = name
+        self.size = 0
+        self.pl = []
 
-    def _has_player(self, player: SoccerPlayer) -> bool:
-        return player in self._players
+    def add_player(self, player: SoccerPlayer):
+        if (player not in self.pl) and len(self.pl) < 11:
+            self.pl.append(player)
+            return True
+        return False
 
-    def add_player(self, player: SoccerPlayer) -> bool:
-        if len(self._players) >= SoccerTeam.SIZE or self._has_player(player):
-            return False
-        self._players.append(player)
-        return True
-
-    def get_average_age(self) -> float:
-        if not self._players:
+    def get_average_age(self):
+        if len(self.pl) == 0:
             return 0.0
-        total_age = sum(player.get_age() for player in self._players)
-        return total_age / len(self._players)
+        ml = []
+        for e in self.pl:
+            ml.append(e.get_age())
+        return float(sum(ml) / len(ml))
 
-    def get_formation(self) -> str:
-        defenders = sum(1 for p in self._players if p.get_position() == SoccerPlayer.position.DF)
-        midfielders = sum(1 for p in self._players if p.get_position() == SoccerPlayer.position.MF)
-        forwards = sum(1 for p in self._players if p.get_position() == SoccerPlayer.position.FW)
-        return f"{defenders}-{midfielders}-{forwards}"
+    def get_formation(self):
+        posl = self.get_posl()
+        return f'{posl.count('position.DF')}-{posl.count('position.MF')}-{posl.count('position.FW')}'
 
-    def get_name(self) -> str:
-        return self._name
+    def get_name(self):
+        return self.name
 
-    def get_players(self) -> list:
-        return self._players[:]
+    def get_players(self):
+        return self.pl + (11 - len(self.pl)) * [None]
 
-    def get_players_at(self, position: SoccerPlayer.position) -> list:
-        return [p for p in self._players if p.get_position() == position]
+    def get_posl(self):
+        posl = []
+        for e in self.pl:
+            posl.append(str(e.position))
+        return posl
 
-    def substitute(self, player_out: SoccerPlayer, player_in: SoccerPlayer) -> bool:
-        if not self._has_player(player_out) or self._has_player(player_in):
-            return False
+    def get_players_at(self, position: SoccerPlayer.position):
+        rl = []
+        for pl in self.pl:
+            if pl.position == position:
+                rl.append(pl)
+        return rl
 
-        pos_out = player_out.get_position()
-        pos_in = player_in.get_position()
-
-        if (pos_out == SoccerPlayer.position.GK and pos_in != SoccerPlayer.position.GK) or \
-                (pos_out != SoccerPlayer.position.GK and pos_in == SoccerPlayer.position.GK):
-            return False
-
-        self._players[self._players.index(player_out)] = player_in
-        return True
-
+    def substitute(self, player_out: SoccerPlayer, player_in: SoccerPlayer):
+        if (player_out in self.pl) and (player_in not in self.pl):
+            if (str(player_out.position) == 'position.GK' and str(player_in.position) == 'position.GK') or (
+                    str(player_out.position) != 'position.GK' and str(player_in.position) != 'position.GK'):
+                self.pl.remove(player_out)
+                self.pl.append(player_in)
+                return True
+        return False

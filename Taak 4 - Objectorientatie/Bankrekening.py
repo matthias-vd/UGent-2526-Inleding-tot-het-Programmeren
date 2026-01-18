@@ -1,13 +1,13 @@
 class BankRekening:
-    def __init__(self,nm,rkn,bd=0):
-        self.nm=nm
-        self.rkn=rkn
-        self.bd=bd
+    def __init__(self,rekeninghouder,rekeningnummer,bedrag=0):
+        self.rekeninghouder = rekeninghouder
+        self.rekeningnummer = rekeningnummer
+        self.bedrag = bedrag
     def __str__(self):
-        return f'{self.nm}, {self.rkn}, bedrag: {self.bd}'
-    def storten(self,bd):
-        self.bd+=bd
-    def afhalen(self,bd):
-        self.bd-=bd
+        return f"{self.rekeninghouder}, {self.rekeningnummer}, bedrag: {self.bedrag}"
+    def storten(self, bedrag):
+        self.bedrag += bedrag
+    def afhalen(self, bedrag):
+        self.bedrag -= bedrag
     def __repr__(self):
-        return f"BankRekening('{self.nm}', '{self.rkn}', {self.bd})"
+        return f"BankRekening('{self.rekeninghouder}', '{self.rekeningnummer}', {self.bedrag})"

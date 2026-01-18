@@ -65,4 +65,4 @@ def get_Wedstrijden(name=Wedstrijden):
 
 #code werkt, testen moet via eigen commando's
 #decoreren van klassement en ranking kan zoals bij loonfiche, de mensen mogen zelf eens kiezen of ze het aanpassen
-# enkel ranking en points_draw/win is gevraagd, rest is wat gissen wat de prof bedoeld
+# enkel ranking en points_draw/win is gevraagd, rest is wat gissen wat de prof bedoeldé

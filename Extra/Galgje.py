@@ -10,7 +10,7 @@ class Galgje:
         self.w=0
         self.repr='.'*len(woord)
         self.geprobeerd=[]
-    def __repr__(self):
+    def __str__(self):
         if self.w==1:
             return f'Proficiat! Je hebt het woord geraden!\n{self.woord}'
         if self.beurten>1 and self.w==0:
